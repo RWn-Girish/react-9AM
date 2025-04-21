@@ -1,12 +1,14 @@
 import './App.css'
 import Counter from './components/Counter'
+import ListComp from './components/ListComp'
 
 function App() {
 
   return (
-    <div>
-      <Counter name="Virat Kohli" team="RCB" />
-    </div>
+    <>
+      {/* <Counter name="Virat Kohli" team="RCB" /> */}
+      <ListComp />
+    </>
   )
 }
 
