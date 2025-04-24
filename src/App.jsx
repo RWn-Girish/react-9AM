@@ -3,6 +3,7 @@ import ControlComp from './components/ControlComp'
 import Counter from './components/Counter'
 import ListComp from './components/ListComp'
 import UnControlComp from './components/UnControlComp'
+import ValidationForm from './components/ValidationForm'
 
 function App() {
 
@@ -10,8 +11,9 @@ function App() {
     <>
       {/* <Counter name="Virat Kohli" team="RCB" /> */}
       {/* <ListComp /> */}
-      <ControlComp />
-      <UnControlComp />
+      {/* <ControlComp />
+      <UnControlComp /> */}
+      <ValidationForm />
     </>
   )
 }
