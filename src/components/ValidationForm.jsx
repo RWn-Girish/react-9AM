@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ValidationForm = () => {
+const ValidationForm = ({title, name}) => {
   const initalState = {
     fname: "",
     lname: "",
@@ -69,7 +69,7 @@ const ValidationForm = () => {
   };
   return (
     <>
-      <h2>User Information</h2>
+      <h2>{title} </h2>
       <form onSubmit={handleSubmit}>
         <label>Firstname: </label>
         <input
