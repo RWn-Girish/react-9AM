@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import ControlComp from "./components/ControlComp";
-import Counter from "./components/Counter";
-import HOCComp from "./components/HOC";
-import ListComp from "./components/ListComp";
-import UnControlComp from "./components/UnControlComp";
-import ValidationForm from "./components/ValidationForm";
+import Counter from "./components/UseCallBack/Counter";
+// import ControlComp from "./components/ControlComp";
+// import Counter from "./components/Counter";
+// import HOCComp from "./components/HOC";
+// import ListComp from "./components/ListComp";
+// import UnControlComp from "./components/UnControlComp";
+// import ValidationForm from "./components/ValidationForm";
 
-const HOCFORM = HOCComp(ValidationForm);
+// const HOCFORM = HOCComp(ValidationForm);
 
 function App() {
   let [isLoading, setIsLoding] = useState(true);
@@ -25,7 +26,9 @@ function App() {
       {/* <ControlComp />
       <UnControlComp /> */}
       {/* <ValidationForm /> */}
-      <HOCFORM isLoading={isLoading} title="ABC Validation" name="Hello" />
+      {/* <HOCFORM isLoading={isLoading} title="ABC Validation" name="Hello" /> */}
+
+      <Counter />
     </>
   );
 }
