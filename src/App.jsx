@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Counter from "./components/UseCallBack/Counter";
+import CompA from "./components/UseContext/CompA";
 // import ControlComp from "./components/ControlComp";
 // import Counter from "./components/Counter";
 // import HOCComp from "./components/HOC";
@@ -28,7 +29,8 @@ function App() {
       {/* <ValidationForm /> */}
       {/* <HOCFORM isLoading={isLoading} title="ABC Validation" name="Hello" /> */}
 
-      <Counter />
+      {/* <Counter /> */}
+      <CompA />
     </>
   );
 }
