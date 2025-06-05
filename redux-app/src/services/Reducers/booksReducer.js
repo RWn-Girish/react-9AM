@@ -18,7 +18,8 @@ const bookReducer = (state = initalState, action) => {
             let allBooks = JSON.parse(localStorage.getItem("books")) || [];
             return {
                 ...state,
-                books: allBooks
+                books: allBooks,
+                isLoading: false
             }
         case "GET_BOOK": 
             let getbooks = JSON.parse(localStorage.getItem("books"));
@@ -49,6 +50,11 @@ const bookReducer = (state = initalState, action) => {
                 ...state,
                 books: updatedBooks,
                 book: null
+            }
+        case "LOADING": 
+            return {
+                ...state,
+                isLoading: true
             }
         default:
             return state;

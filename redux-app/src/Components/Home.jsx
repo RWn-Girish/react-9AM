@@ -1,12 +1,12 @@
-import { Button, Table } from "react-bootstrap";
+import { Button, Spinner, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useEffect } from "react";
-import { deleteBook, getAllBooks } from "../services/Actions/booksAction";
+import { deleteBook,  getAllBooksAsync} from "../services/Actions/booksAction";
 import { useNavigate } from "react-router";
 
 const Home = () => {
-  const { books } = useSelector((state) => state.bookReducer);
+  const { books, isLoading } = useSelector((state) => state.bookReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,12 +18,21 @@ const Home = () => {
   }
 
   useEffect(() => {
-    dispatch(getAllBooks());
+    dispatch(getAllBooksAsync());
   }, []);
   return (
     <>
       <h1>Home Page</h1>
-      <Table striped bordered hover size="sm">
+      {isLoading ? <div>
+      <Spinner animation="grow" variant="primary" />
+      <Spinner animation="grow" variant="secondary" />
+      <Spinner animation="grow" variant="success" />
+      <Spinner animation="grow" variant="danger" />
+      <Spinner animation="grow" variant="warning" />
+      <Spinner animation="grow" variant="info" />
+      <Spinner animation="grow" variant="light" />
+      <Spinner animation="grow" variant="dark" />
+      </div> : <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>#</th>
@@ -59,7 +68,8 @@ const Home = () => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </Table> }
+      
     </>
   );
 };
