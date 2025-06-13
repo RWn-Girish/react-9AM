@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 const Home = () => {
   const { books, isLoading } = useSelector((state) => state.bookReducer);
+  const {name} = useSelector(state => state.counterReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const Home = () => {
   }, []);
   return (
     <>
-      <h1>Home Page</h1>
+      <h1>Home Page {name}</h1>
       {isLoading ? <div>
       <Spinner animation="grow" variant="primary" />
       <Spinner animation="grow" variant="secondary" />

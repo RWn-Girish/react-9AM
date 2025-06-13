@@ -3,6 +3,7 @@ const initalState = {
     book: null,
     isLoading: false,
     isCreated: false,
+    isUpdated: false,
     errorMsg: ""
 }
 
@@ -25,32 +26,22 @@ const bookReducer = (state = initalState, action) => {
                 books: action.payload,
                 isLoading: false,
                 isCreated: false,
+                isUpdated: false
             }
         case "GET_BOOK": 
-            let getbooks = JSON.parse(localStorage.getItem("books"));
-            let singleBook = getbooks.find(book => book.id == action.payload)
             return {
                 ...state,
-                book: singleBook
+                book: action.payload
             }
         case "DELETE_BOOK_REJ":
             return {
                 ...state,
                 errorMsg: action.payload
             }
-        case "UPDATE_BOOK":
-            let getBooks = JSON.parse(localStorage.getItem("books"))
-            let updatedBooks = getBooks.map(book => {
-                if(book.id == action.payload.id){
-                    return action.payload;
-                }else{
-                    return book;
-                }
-            });
-            localStorage.setItem("books", JSON.stringify(updatedBooks));
+        case "UPDATE_BOOK_SUC":
             return {
                 ...state,
-                books: updatedBooks,
+                isUpdated: true,
                 book: null
             }
         case "LOADING": 

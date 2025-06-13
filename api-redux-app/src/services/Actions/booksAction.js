@@ -26,17 +26,16 @@ export const deleteBookRej = (err) =>{
     }
 };
 
-export const getBook = (id) =>{
+export const getBook = (data) =>{
     return {
         type: "GET_BOOK",
-        payload: id
+        payload: data
     }
 };
 
-export const updateBook = (data) => {
+export const updateBook = () => {
     return {
-        type: "UPDATE_BOOK",
-        payload: data
+        type: "UPDATE_BOOK_SUC",
     }
 };
 
@@ -74,6 +73,31 @@ export const deleteBookAsync = (id) => {
         try{
             await axios.delete(`http://localhost:3000/books/${id}`);
             dispatch(getAllBooksAsync());
+        }catch(err){
+            console.log(err);
+            dispatch(deleteBookRej(err.message));
+        }
+    }
+}
+
+export const getBookAsync = (id) => {
+    return async(dispatch) => {
+        dispatch(loading());
+        try{
+            let res = await axios.get(`http://localhost:3000/books/${id}`);
+            dispatch(getBook(res.data));
+        }catch(err){
+            console.log(err);
+            dispatch(deleteBookRej(err.message));
+        }
+    }
+}
+export const updateBookAsync = (data) => {
+    return async(dispatch) => {
+        dispatch(loading());
+        try{
+            await axios.put(`http://localhost:3000/books/${data.id}`, data);
+            dispatch(updateBook());
         }catch(err){
             console.log(err);
             dispatch(deleteBookRej(err.message));
