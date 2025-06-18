@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 export const addNewBookSuc = () => {
@@ -65,9 +65,6 @@ export const addNewBookAsync = (data) => {
     return async(dispatch) => {
         dispatch(loading());
         try{
-            // await axios.post("http://localhost:3000/books", data);
-            // dispatch(addNewBookSuc());
-
             // let res = await addDoc(collection(db, "books"), data);      // auto generate id
             await setDoc(doc(db, "books", data.id), data);      // manually set id
             dispatch(addNewBookSuc());
@@ -81,7 +78,7 @@ export const deleteBookAsync = (id) => {
     return async(dispatch) => {
         dispatch(loading());
         try{
-            await axios.delete(`http://localhost:3000/books/${id}`);
+            await deleteDoc(doc(db, "books", id));
             dispatch(getAllBooksAsync());
         }catch(err){
             console.log(err);
@@ -94,8 +91,9 @@ export const getBookAsync = (id) => {
     return async(dispatch) => {
         dispatch(loading());
         try{
-            let res = await axios.get(`http://localhost:3000/books/${id}`);
-            dispatch(getBook(res.data));
+            let res = await getDoc(doc(db, "books", id))
+            console.log(res.data())
+            dispatch(getBook(res.data()));
         }catch(err){
             console.log(err);
             dispatch(deleteBookRej(err.message));
@@ -106,7 +104,7 @@ export const updateBookAsync = (data) => {
     return async(dispatch) => {
         dispatch(loading());
         try{
-            await axios.put(`http://localhost:3000/books/${data.id}`, data);
+            await updateDoc(doc(db, "books", data.id), data)
             dispatch(updateBook());
         }catch(err){
             console.log(err);
