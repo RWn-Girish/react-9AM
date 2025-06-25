@@ -4,8 +4,11 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { useEffect } from "react";
 import { deleteBookAsync,  getAllBooksAsync} from "../services/Actions/booksAction";
 import { useNavigate } from "react-router";
+import { getCurrentUser } from "../services/getUser";
 
 const Home = () => {
+  const user = getCurrentUser();
+  console.log("User: ==> ",user);
   const { books, isLoading } = useSelector((state) => state.bookReducer);
   const {name} = useSelector(state => state.counterReducer);
   const dispatch = useDispatch();

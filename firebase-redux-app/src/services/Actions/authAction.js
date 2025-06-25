@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { auth } from "../../firebase"
 
 
@@ -49,6 +49,22 @@ export const signINAsync = (data) => {
             let userCred = await signInWithEmailAndPassword(auth, data.email, data.password)
             // console.log(userCred.user);
             if(userCred.user){
+                dispatch(signINSuc(userCred.user));
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(errorMsg(error.message));
+        }
+    }
+}
+
+export const googleSignInAsync = () => {
+    return async (dispatch) => {
+        try {
+           let authProvider = new GoogleAuthProvider();
+           let userCred = await signInWithPopup(auth, authProvider)
+        //    console.log(userCred.user);
+        if(userCred.user){
                 dispatch(signINSuc(userCred.user));
             }
         } catch (error) {
