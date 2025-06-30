@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import generateUniqueId from "generate-unique-id";
 import { useNavigate } from "react-router";
 import { addNewBookAsync } from "../services/Actions/booksAction";
+import { uploadImage } from "../services/uploadImage";
 
 const AddBook = () => {
   const navigate = useNavigate();
@@ -26,6 +27,14 @@ const AddBook = () => {
       [name]: value,
     });
   };
+
+  const handleFileUpload = async(e) => {
+     let image = await uploadImage(e.target.files[0])
+     setInputForm({
+      ...inputForm,
+      image: `${image}`,
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -120,11 +129,9 @@ const AddBook = () => {
             </Form.Label>
             <Col sm="10">
               <Form.Control
-                type="text"
-                placeholder="Enter Book Image URL"
+                type="file"
                 name="image"
-                value={inputForm.image}
-                onChange={handleChanged}
+                onChange={handleFileUpload}
               />
             </Col>
           </Form.Group>
