@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { deleteBookAsync,  getAllBooksAsync} from "../services/Actions/booksAction";
 import { useNavigate } from "react-router";
 import { getCurrentUser } from "../services/getUser";
+import { toast, ToastContainer} from 'react-toastify';
 
 const Home = () => {
   const user = getCurrentUser();
@@ -19,13 +20,16 @@ const Home = () => {
   }
   const handleDelete = (id) => {
     dispatch(deleteBookAsync(id))
+    toast.success("Book Delete Success");
   }
 
   useEffect(() => {
     dispatch(getAllBooksAsync());
+    toast.success("Get All Books");
   }, []);
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} />
       <h1>Home Page {name}</h1>
       {isLoading ? <div>
       <Spinner animation="grow" variant="primary" />

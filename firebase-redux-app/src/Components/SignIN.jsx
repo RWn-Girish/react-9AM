@@ -3,6 +3,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { googleSignInAsync, signINAsync } from "../services/Actions/authAction";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignIN = () => {
   const navigate = useNavigate();
@@ -33,11 +34,15 @@ const SignIN = () => {
 
     useEffect(() => {
       if(user){
-        navigate("/")
+        toast.success("Login Success");
+        setTimeout(()=> {
+          navigate("/");
+        }, 2500);
       }
     }, [user])
   return (
     <>
+    <ToastContainer position="top-right" autoClose={3000} />
       <h1>SignIN Page</h1>
       {errorMSG ? <p>{errorMSG}</p> : ""}
       <Form onSubmit={handleSubmit}>
